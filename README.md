@@ -30,7 +30,7 @@ Write a `#batch_badge_creator` method that takes an array of names as an argumen
 and **returns an array** of badge messages.
 
 ```rb
-batch_badge_creator(["Arel", "Carol"])
+batch_badge_creator(%w[Arel Carol])
 # => ["Hello, my name is Arel.", "Hello, my name is Carol."]
 ```
 
@@ -46,7 +46,7 @@ You have rooms 1-7.
 "Hello, \_\_\_\_\_! You'll be assigned to room \_\_\_\_\_!"
 
 ```rb
-assign_rooms(["Arel", "Carol"])
+assign_rooms(%w[Arel Carol])
 # => ["Hello, Arel! You'll be assigned to room 1!", "Hello, Carol! You'll be assigned to room 2!"]
 ```
 
@@ -73,7 +73,7 @@ Now you have to tell the printer what to print. Create a method called
 method, and then the output of the `#assign_rooms` method, to the screen.
 
 ```rb
-printer(["Arel", "Carol"])
+printer(%w[Arel Carol])
 # Hello, my name is Arel.
 # Hello, my name is Carol.
 # Hello, Arel! You'll be assigned to room 1!

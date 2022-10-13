@@ -1,10 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'conference_badges' do
-
+describe "conference_badges" do
   let(:name) { "Arel" }
-  let(:attendees) { ["Edsger", "Ada", "Charles", "Alan", "Grace", "Linus", "Matz"] }
-  let(:badges) do 
+  let(:attendees) { %w[Edsger Ada Charles Alan Grace Linus Matz] }
+  let(:badges) do
     [
       "Hello, my name is Edsger.",
       "Hello, my name is Ada.",
@@ -24,20 +23,19 @@ describe 'conference_badges' do
       "Hello, Grace! You'll be assigned to room 5!",
       "Hello, Linus! You'll be assigned to room 6!",
       "Hello, Matz! You'll be assigned to room 7!"
-   ]
+    ]
   end
 
-# This funny looking <<~TEXT thing is called heredoc. It's a multi-line string
-# delimiter that makes it really easy for us to write multi-line strings in the
-# middle of code. The TEXT part is arbitrary too.
-# It could easily have been <<~BLAHBLAH. The only requirement is that you use
-# the same word to end the multi-line string.
+  # This funny looking <<~TEXT thing is called heredoc. It's a multi-line string
+  # delimiter that makes it really easy for us to write multi-line strings in the
+  # middle of code. The TEXT part is arbitrary too.
+  # It could easily have been <<~BLAHBLAH. The only requirement is that you use
+  # the same word to end the multi-line string.
 
-# For more info about heredocs, see this link:
-# https://www.rubyguides.com/2018/11/ruby-heredoc/
+  # For more info about heredocs, see this link:
+  # https://www.rubyguides.com/2018/11/ruby-heredoc/
 
-  let(:badges_and_room_assignments) do
-    <<~TEXT
+  let(:badges_and_room_assignments) { <<~TEXT }
       Hello, my name is Edsger.
       Hello, my name is Ada.
       Hello, my name is Charles.
@@ -53,52 +51,48 @@ describe 'conference_badges' do
       Hello, Linus! You'll be assigned to room 6!
       Hello, Matz! You'll be assigned to room 7!
     TEXT
-  end
 
-  describe '#badge_maker' do
-
+  describe "#badge_maker" do
     # Question 1
 
-    it 'returns a formatted badge' do
+    it "returns a formatted badge" do
       expect(badge_maker(name)).to eq("Hello, my name is #{name}.")
     end
-
   end
 
-  describe '#batch_badge_creator' do
-
+  describe "#batch_badge_creator" do
     # Question 2b
 
-    it 'returns a list of badge messages' do
+    it "returns a list of badge messages" do
       expect(batch_badge_creator(attendees)).to eq(badges)
     end
-    it 'does not hard-code response' do
-      expect(batch_badge_creator(["Johnny"])).to eq(["Hello, my name is Johnny."])
+    it "does not hard-code response" do
+      expect(batch_badge_creator(["Johnny"])).to eq(
+        ["Hello, my name is Johnny."]
+      )
     end
-
   end
 
-  describe '#assign_rooms' do
-
+  describe "#assign_rooms" do
     # Question 3
 
-    it 'returns a list of welcome messages and room assignments' do
+    it "returns a list of welcome messages and room assignments" do
       expect(assign_rooms(attendees)).to eq(room_assignments)
     end
-    it 'does not hard-code the response' do
-      expect(assign_rooms(["Steve"])).to eq(["Hello, Steve! You'll be assigned to room 1!"])
+    it "does not hard-code the response" do
+      expect(assign_rooms(["Steve"])).to eq(
+        ["Hello, Steve! You'll be assigned to room 1!"]
+      )
     end
-
   end
 
-  describe '#printer' do
-
+  describe "#printer" do
     # Question 4
     # The method `printer` should output first the results of the batch_badge_creator method and then of the assign_rooms method to the screen - this way you can output
     # the badges and room assignments one at a time.
     # To make this test pass, make sure you are iterating through your badges and room assignments lists.
 
-    it 'outputs the list of badges and room_assignments' do
+    it "outputs the list of badges and room_assignments" do
       badges_and_room_assignments.each_line do |line|
         # $stdout is a Ruby global varibale that represents the current standard output.
         # In this case, the standard output is your terminal screen. This test, then,
@@ -108,7 +102,5 @@ describe 'conference_badges' do
       end
       printer(attendees)
     end
-
   end
-
 end
